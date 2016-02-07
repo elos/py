@@ -55,7 +55,7 @@ class DB:
         r = requests.post(self._endpoint(recordRoute), auth=(self.username, self.password), params={
             "kind": record.kind(),
             "id": record.id,
-        })
+        }, data=record.marshal())
 
         if r.status_code == statusOk or r.status_code == statusCreated:
             record.unmarshal(r.json())
