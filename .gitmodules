@@ -1,0 +1,3 @@
+[submodule "elos/gen/definitions"]
+	path = elos/gen/definitions
+	url = https://github.com/elos/definitions
