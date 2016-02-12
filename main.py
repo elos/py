@@ -19,9 +19,7 @@ def locationString(self):
 """
 class MyAgent(AbstractAgent):
     def start(self, changes):
-        while True:
-            change = changes.recv()
-
+        for change in changes:
             if change.record_kind == "event":
                 event = change.record_data.unmarshal(Event)
                 loc = event.location(self.db)

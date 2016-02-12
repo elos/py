@@ -1,5 +1,4 @@
 import requests
-import goless
 import json
 from websocket import create_connection
 
@@ -35,14 +34,14 @@ class DB:
 
             Remember a user of the database calls recordData.transfer(record)
         """
-        r = requests.post(_endpoint(recordQueryRoute), auth=(username, password), params={
-            "kind": record.kind(),
+        r = requests.post(self._endpoint(recordQueryRoute), auth=(self.username, self.password), params={
+            "kind": kind,
             "skip": skip,
             "limit": limit
         }, data=attrs)
 
         if r.status_code != statusOk:
-            raise Exception("Bad response from server", r.text)
+            raise Exception("db._query Bad response from server", r.text)
             return
 
         records = []
@@ -60,7 +59,7 @@ class DB:
         if r.status_code == statusOk or r.status_code == statusCreated:
             record.unmarshal(r.json())
         else:
-            raise Exception("Bad response from server", r.text)
+            raise Exception("db.save Bad response from server", r.text)
      # --- }}}
 
     # --- delete(record) {{{
@@ -73,7 +72,7 @@ class DB:
         if r.status_code == statusOk:
             return
         else:
-            raise Exception("Bad response from server", r.text)
+            raise Exception("db.delete Bad response from server", r.text)
     # --- }}}
 
     # --- get(id, recordClass) {{{{
@@ -89,7 +88,8 @@ class DB:
         if r.status_code == statusOk:
             return recordClass.unmarshal(r.json())
         else:
-            raise Exception("Bad response from server", r.text)
+            eString = "db.get(%s, %s) Bad response from server" % (recordClass.Kind(), id)
+            raise Exception(eString, r.text)
 
     # --- }}}
 
@@ -98,7 +98,7 @@ class DB:
         """
             Constructs a Query object, which is purely a builder object
         """
-        return Query(kind, db)
+        return Query(kind, self)
     # --- }}}
 
     # --- changes() {{{
@@ -107,22 +107,9 @@ class DB:
             Changes opens a socket to gaia, and then returns the
             changes of class Change.
         """
-        c = goless.chan()
-
-        def getchanges():
-            ws = create_connection("ws://%s/record/changes/?public=%s&private=%s" % (self.host, self.username, self.password))
-            while True:
-                result = ws.recv()
-                data = json.loads(result)
-                try:
-                    c.send(Change.unmarshal(data))
-                except goless.ChannelClosed:
-                    break
-            ws.close()
-
-        goless.go(getchanges)
-
-        return c
+        ws = create_connection("ws://%s/record/changes/?public=%s&private=%s" % (self.host, self.username, self.password))
+        for result in ws:
+            yield Change.unmarshal(json.loads(result))
     # --- }}}
 
 # --- DB }}}
@@ -138,23 +125,27 @@ class Query:
     """
 
     def __init__(self, kind, db):
+        self._skip = 0
+        self._limit = 0
+        self._attrs = {}
+
         self.kind = kind
         self.db = db
 
     def limit(self, i):
-        self.limit = i
+        self._limit = i
         return self
 
     def skip(self, i):
-        self.skip = i
+        self._skip = i
         return self
 
-    def select(attrs):
-        self.attrs = attrs
+    def select(self, attrs):
+        self._attrs = attrs
         return self
 
-    def execute():
-        return db._query(kind, attrs, skip, limit)
+    def execute(self):
+        return self.db._query(self.kind, self._attrs, self._skip, self._limit)
 
 # --- }}}
 

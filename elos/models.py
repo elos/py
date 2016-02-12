@@ -2,7 +2,7 @@
     
 
 import dateutil.parser
-from db import Record
+from elos.db import Record
 
 
 ActionKind = "action" 
@@ -54,15 +54,24 @@ class Action(Record):
      
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def person(self, db): 
-        return db.get(Person, self.person_id)
+        if self.person_id != None:
+            return db.get(Person, self.person_id)
+        else:
+            return None
       
     
     def task(self, db): 
-        return db.get(Task, self.task_id)
+        if self.task_id != None:
+            return db.get(Task, self.task_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -126,15 +135,24 @@ class Attribute(Record):
     
     
     def object(self, db): 
-        return db.get(Object, self.object_id)
+        if self.object_id != None:
+            return db.get(Object, self.object_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def trait(self, db): 
-        return db.get(Trait, self.trait_id)
+        if self.trait_id != None:
+            return db.get(Trait, self.trait_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -195,7 +213,10 @@ class Calendar(Record):
     
     
     def base_schedule(self, db): 
-        return db.get(Schedule, self.base_schedule_id)
+        if self.base_schedule_id != None:
+            return db.get(Schedule, self.base_schedule_id)
+        else:
+            return None
       
     
     def fixtures(self, db): 
@@ -203,11 +224,17 @@ class Calendar(Record):
       
     
     def manifest_fixture(self, db): 
-        return db.get(Fixture, self.manifest_fixture_id)
+        if self.manifest_fixture_id != None:
+            return db.get(Fixture, self.manifest_fixture_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -270,7 +297,10 @@ class Context(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -328,7 +358,10 @@ class Credential(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def sessions(self, db): 
@@ -395,15 +428,24 @@ class Datum(Record):
     
     
     def event(self, db): 
-        return db.get(Event, self.event_id)
+        if self.event_id != None:
+            return db.get(Event, self.event_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def person(self, db): 
-        return db.get(Person, self.person_id)
+        if self.person_id != None:
+            return db.get(Person, self.person_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -468,27 +510,45 @@ class Event(Record):
     
     
     def location(self, db): 
-        return db.get(Location, self.location_id)
+        if self.location_id != None:
+            return db.get(Location, self.location_id)
+        else:
+            return None
       
     
     def media(self, db): 
-        return db.get(Media, self.media_id)
+        if self.media_id != None:
+            return db.get(Media, self.media_id)
+        else:
+            return None
       
     
     def note(self, db): 
-        return db.get(Note, self.note_id)
+        if self.note_id != None:
+            return db.get(Note, self.note_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def prior(self, db): 
-        return db.get(Event, self.prior_id)
+        if self.prior_id != None:
+            return db.get(Event, self.prior_id)
+        else:
+            return None
       
     
     def quantity(self, db): 
-        return db.get(Quantity, self.quantity_id)
+        if self.quantity_id != None:
+            return db.get(Quantity, self.quantity_id)
+        else:
+            return None
       
     
     def tags(self, db): 
@@ -578,7 +638,10 @@ class Fixture(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -661,7 +724,10 @@ class Group(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -725,11 +791,17 @@ class Habit(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def tag(self, db): 
-        return db.get(Tag, self.tag_id)
+        if self.tag_id != None:
+            return db.get(Tag, self.tag_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -787,15 +859,24 @@ class Link(Record):
     
     
     def object(self, db): 
-        return db.get(Object, self.object_id)
+        if self.object_id != None:
+            return db.get(Object, self.object_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def relation(self, db): 
-        return db.get(Relation, self.relation_id)
+        if self.relation_id != None:
+            return db.get(Relation, self.relation_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -853,7 +934,10 @@ class Location(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -910,7 +994,10 @@ class Media(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -972,11 +1059,17 @@ class Model(Record):
       
     
     def ontology(self, db): 
-        return db.get(Ontology, self.ontology_id)
+        if self.ontology_id != None:
+            return db.get(Ontology, self.ontology_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def relations(self, db): 
@@ -1044,7 +1137,10 @@ class Note(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1107,15 +1203,24 @@ class Object(Record):
       
     
     def model(self, db): 
-        return db.get(Model, self.model_id)
+        if self.model_id != None:
+            return db.get(Model, self.model_id)
+        else:
+            return None
       
     
     def ontology(self, db): 
-        return db.get(Ontology, self.ontology_id)
+        if self.ontology_id != None:
+            return db.get(Ontology, self.ontology_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1182,7 +1287,10 @@ class Ontology(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1242,7 +1350,10 @@ class Person(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1300,6 +1411,7 @@ class Profile(Record):
     current_actionable []str 
     data str 
     events str 
+    location []str 
     ontology []str 
     owner []str 
     routines str 
@@ -1313,11 +1425,17 @@ class Profile(Record):
       
     
     def calendar(self, db): 
-        return db.get(Calendar, self.calendar_id)
+        if self.calendar_id != None:
+            return db.get(Calendar, self.calendar_id)
+        else:
+            return None
       
     
     def current_action(self, db): 
-        return db.get(Action, self.current_action_id)
+        if self.current_action_id != None:
+            return db.get(Action, self.current_action_id)
+        else:
+            return None
       
      
     
@@ -1329,12 +1447,25 @@ class Profile(Record):
         [db.get(Event, id) for id in self.events_ids]
       
     
+    def location(self, db): 
+        if self.location_id != None:
+            return db.get(Location, self.location_id)
+        else:
+            return None
+      
+    
     def ontology(self, db): 
-        return db.get(Ontology, self.ontology_id)
+        if self.ontology_id != None:
+            return db.get(Ontology, self.ontology_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def routines(self, db): 
@@ -1364,6 +1495,7 @@ class Profile(Record):
         json["current_actionable_id"] = self.current_actionable_id 
         json["data_ids"] = self.data_ids 
         json["events_ids"] = self.events_ids 
+        json["location_id"] = self.location_id 
         json["ontology_id"] = self.ontology_id 
         json["owner_id"] = self.owner_id 
         json["routines_ids"] = self.routines_ids 
@@ -1396,6 +1528,7 @@ class Profile(Record):
         self.current_actionable_id = json["current_actionable_id"] 
         self.data_ids = json["data_ids"] 
         self.events_ids = json["events_ids"] 
+        self.location_id = json["location_id"] 
         self.ontology_id = json["ontology_id"] 
         self.owner_id = json["owner_id"] 
         self.routines_ids = json["routines_ids"] 
@@ -1417,7 +1550,10 @@ class Quantity(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1480,11 +1616,17 @@ class Relation(Record):
       
     
     def model(self, db): 
-        return db.get(Model, self.model_id)
+        if self.model_id != None:
+            return db.get(Model, self.model_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1559,11 +1701,17 @@ class Routine(Record):
       
     
     def current_action(self, db): 
-        return db.get(Action, self.current_action_id)
+        if self.current_action_id != None:
+            return db.get(Action, self.current_action_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def tasks(self, db): 
@@ -1636,7 +1784,10 @@ class Schedule(Record):
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1696,11 +1847,17 @@ class Session(Record):
     
     
     def credential(self, db): 
-        return db.get(Credential, self.credential_id)
+        if self.credential_id != None:
+            return db.get(Credential, self.credential_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1756,7 +1913,10 @@ class Tag(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
@@ -1813,7 +1973,10 @@ class Task(Record):
     
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
     
     def prerequisites(self, db): 
@@ -1890,11 +2053,17 @@ class Trait(Record):
       
     
     def model(self, db): 
-        return db.get(Model, self.model_id)
+        if self.model_id != None:
+            return db.get(Model, self.model_id)
+        else:
+            return None
       
     
     def owner(self, db): 
-        return db.get(User, self.owner_id)
+        if self.owner_id != None:
+            return db.get(User, self.owner_id)
+        else:
+            return None
       
 
     def marshal(self):
