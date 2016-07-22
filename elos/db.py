@@ -38,7 +38,7 @@ class DB:
             "kind": kind,
             "skip": skip,
             "limit": limit
-        }, data=attrs)
+        }, data=json.dumps(attrs))
 
         if r.status_code != statusOk:
             raise Exception("db._query Bad response from server", r.text)
@@ -52,9 +52,9 @@ class DB:
     # --- save(record) {{{
     def save(self, record):
         r = requests.post(self._endpoint(recordRoute), auth=(self.username, self.password), params={
-            "kind": record.kind(),
+            "kind": record.Kind(),
             "id": record.id,
-        }, data=record.marshal())
+        }, data=json.dumps(record.marshal()))
 
         if r.status_code == statusOk or r.status_code == statusCreated:
             record.unmarshal(r.json())
@@ -65,7 +65,7 @@ class DB:
     # --- delete(record) {{{
     def delete(self, record):
         r = requests.delete(self._endpoint(recordRoute), auth=(self.username, self.password), params={
-            "kind": record.kind(),
+            "kind": record.Kind(),
             "id": record.id,
         })
 
