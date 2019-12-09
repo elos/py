@@ -51,7 +51,7 @@ class Action(Record):
     """
 
     
-     
+        
     
     def owner(self, db): 
         if self.owner_id != None:
@@ -119,6 +119,7 @@ class Action(Record):
         self.task_id = json["task_id"] 
 
         return self
+
 
 class Attribute(Record):
     """ 
@@ -194,6 +195,7 @@ class Attribute(Record):
         self.trait_id = json["trait_id"] 
 
         return self
+
 
 class Calendar(Record):
     """ 
@@ -283,6 +285,7 @@ class Calendar(Record):
 
         return self
 
+
 class Context(Record):
     """ 
     created_at DateTime 
@@ -340,6 +343,7 @@ class Context(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Credential(Record):
     """ 
@@ -411,6 +415,7 @@ class Credential(Record):
         self.sessions_ids = json["sessions_ids"] 
 
         return self
+
 
 class Datum(Record):
     """ 
@@ -489,6 +494,7 @@ class Datum(Record):
         self.person_id = json["person_id"] 
 
         return self
+
 
 class Event(Record):
     """ 
@@ -605,6 +611,7 @@ class Event(Record):
 
         return self
 
+
 class Fixture(Record):
     """ 
     created_at DateTime 
@@ -626,12 +633,12 @@ class Fixture(Record):
     """
 
     
-     
+        
     
     def actions(self, db): 
         [db.get(Action, id) for id in self.actions_ids]
       
-     
+    
     
     def events(self, db): 
         [db.get(Event, id) for id in self.events_ids]
@@ -699,6 +706,7 @@ class Fixture(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Group(Record):
     """ 
@@ -772,6 +780,7 @@ class Group(Record):
 
         return self
 
+
 class Habit(Record):
     """ 
     created_at DateTime 
@@ -843,6 +852,7 @@ class Habit(Record):
         self.tag_id = json["tag_id"] 
 
         return self
+
 
 class Link(Record):
     """ 
@@ -919,6 +929,7 @@ class Link(Record):
 
         return self
 
+
 class Location(Record):
     """ 
     altitude float 
@@ -980,6 +991,7 @@ class Location(Record):
 
         return self
 
+
 class Media(Record):
     """ 
     codec str 
@@ -1037,6 +1049,7 @@ class Media(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Model(Record):
     """ 
@@ -1124,6 +1137,7 @@ class Model(Record):
 
         return self
 
+
 class Note(Record):
     """ 
     created_at DateTime 
@@ -1178,6 +1192,7 @@ class Note(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Object(Record):
     """ 
@@ -1265,6 +1280,7 @@ class Object(Record):
 
         return self
 
+
 class Ontology(Record):
     """ 
     created_at DateTime 
@@ -1331,6 +1347,7 @@ class Ontology(Record):
 
         return self
 
+
 class Person(Record):
     """ 
     created_at DateTime 
@@ -1396,6 +1413,7 @@ class Person(Record):
 
         return self
 
+
 class Profile(Record):
     """ 
     created_at DateTime 
@@ -1437,7 +1455,7 @@ class Profile(Record):
         else:
             return None
       
-     
+    
     
     def data(self, db): 
         [db.get(Datum, id) for id in self.data_ids]
@@ -1536,6 +1554,7 @@ class Profile(Record):
 
         return self
 
+
 class Quantity(Record):
     """ 
     created_at DateTime 
@@ -1593,6 +1612,7 @@ class Quantity(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Relation(Record):
     """ 
@@ -1674,6 +1694,7 @@ class Relation(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Routine(Record):
     """ 
@@ -1764,6 +1785,7 @@ class Routine(Record):
 
         return self
 
+
 class Schedule(Record):
     """ 
     created_at DateTime 
@@ -1831,6 +1853,7 @@ class Schedule(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Session(Record):
     """ 
@@ -1900,6 +1923,7 @@ class Session(Record):
 
         return self
 
+
 class Tag(Record):
     """ 
     created_at DateTime 
@@ -1954,6 +1978,7 @@ class Tag(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class Task(Record):
     """ 
@@ -2033,6 +2058,7 @@ class Task(Record):
 
         return self
 
+
 class Trait(Record):
     """ 
     created_at DateTime 
@@ -2107,6 +2133,7 @@ class Trait(Record):
         self.owner_id = json["owner_id"] 
 
         return self
+
 
 class User(Record):
     """ 
